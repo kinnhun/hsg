@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Ngăn Apache xử lý tiếp nếu request là file index.html
+    RewriteRule ^index\.html$ - [L]
+    
+    # Chuyển hướng tất cả request không phải file hoặc thư mục thật về index.html
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>
