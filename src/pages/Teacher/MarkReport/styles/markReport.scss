@@ -1,0 +1,149 @@
+.mark-report-container {
+  @apply bg-white rounded-lg shadow-md p-5;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  .mark-report-header {
+    h2 {
+      @apply text-2xl font-semibold text-gray-800;
+    }
+  }
+
+  .mark-report-filters {
+    @apply bg-gray-50 p-4 rounded-lg;
+    
+    select {
+      @apply border border-gray-200 rounded px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none;
+      min-width: 200px;
+    }
+  }
+
+  .table-wrapper {
+    flex: 1;
+    min-height: 0;
+    @apply border border-gray-200 rounded-lg;
+  }
+
+  .table-container {
+    height: 100%;
+    overflow: auto;
+
+    // Tùy chỉnh thanh cuộn
+    &::-webkit-scrollbar {
+      @apply w-2 h-2;
+    }
+
+    &::-webkit-scrollbar-track {
+      @apply bg-gray-100 rounded-full;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+    }
+
+    table {
+      @apply w-full border-collapse;
+
+      // Định nghĩa độ rộng cột
+      $column-widths: (
+        'id': 80px,
+        'name': 180px,
+        'subject': 150px,
+        'type': 150px,
+        'score': 100px,
+        'comment': 250px,
+        'action': 100px
+      );
+
+      // Áp dụng style cho cả th và td
+      @each $column, $width in $column-widths {
+        .column-#{$column} {
+          min-width: $width;
+          max-width: if($column == 'comment', none, $width);
+        }
+      }
+
+      // Style cho header
+      thead {
+        @apply sticky top-0 z-10 bg-gray-50;
+        
+        tr {
+          th {
+            @apply font-semibold text-left p-4 border-b-2 border-gray-200;
+            background: inherit;
+            white-space: nowrap;
+
+            &::after {
+              content: '';
+              @apply absolute bottom-0 left-0 right-0 h-px bg-gray-200;
+            }
+          }
+        }
+      }
+
+      // Style cho body
+      tbody {
+        tr {
+          @apply hover:bg-gray-50 transition-colors;
+
+          td {
+            @apply p-4 border-b border-gray-100;
+            
+            &.column-comment {
+              white-space: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Style cho nút sửa
+  .edit-btn {
+    @apply px-3 py-1 bg-blue-500 text-white rounded
+           hover:bg-blue-600 transition-colors;
+  }
+}
+
+// Toast notification styles
+.toast-notification {
+  @apply fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg
+         text-white z-50 transition-all duration-300;
+
+  &.toast-success {
+    @apply bg-green-500;
+  }
+
+  &.toast-error {
+    @apply bg-red-500;
+  }
+} 
+
+
+.edit-btn {
+  background-color: #facc15; // Màu vàng nhạt
+  color: #333; // Màu chữ tối để dễ đọc
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+      background-color: #eab308; // Đậm hơn khi hover
+  }
+
+  &:active {
+      transform: scale(0.95); // Hiệu ứng nhấn xuống
+  }
+
+  &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.5); // Hiệu ứng focus
+  }
+}

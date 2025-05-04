@@ -1,0 +1,45 @@
+.toast-notification {
+    position: fixed;
+    top: 100px;
+    right: 16px;
+    padding: 20px 30px; // Tăng padding để làm thẻ lớn hơn
+    border-radius: 6px; // Bo góc nhiều hơn một chút
+    color: white;
+    font-size: 14px; // Tăng kích thước chữ
+    font-weight: 500; // Làm đậm chữ hơn một chút
+    z-index: 1000;
+    min-width: 220px; // Tăng kích thước tối thiểu
+    max-width: 300px; // Tăng kích thước tối đa
+    animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); // Tăng bóng đổ nhẹ
+    line-height: 1.4; // Giữ khoảng cách dòng thoải mái hơn
+
+    &.toast-success {
+        background-color: #22c55e;
+    }
+
+    &.toast-error {
+        background-color: #ef4444;
+    }
+}
+
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  } 

@@ -1,0 +1,16 @@
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+  display: none;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+  /* display: none; */
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+}

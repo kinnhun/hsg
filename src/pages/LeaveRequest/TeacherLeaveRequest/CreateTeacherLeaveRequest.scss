@@ -1,0 +1,97 @@
+.create-teacher-leave-request {
+    padding: 24px;
+    width: 100%; // Full width of the screen
+    margin: 0 auto; // Center the form
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 24px;
+      color: #333;
+    }
+  
+    .ant-form-item {
+      margin-bottom: 16px;
+  
+      .ant-form-item-label {
+        font-weight: bold;
+        color: #555;
+      }
+    }
+  
+    .date-picker-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px; // Space between the two date pickers
+  
+      .ant-form-item {
+        flex: 1; // Each date picker takes equal space
+        margin-bottom: 0; // Remove extra margin since they're in a row
+  
+        .ant-picker {
+          width: 100%; // Full width within its container
+          border-radius: 4px;
+        }
+      }
+    }
+  
+    .ant-input {
+      height: 100px; // Increased height for the reason input
+      border-radius: 4px;
+    }
+  
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px; // Reduced gap for a tighter layout
+  
+      .ant-btn {
+        width: auto; // Let the button size naturally based on content
+        padding: 4px 12px; // Smaller padding for a compact look
+        font-size: 14px; // Slightly smaller font
+        height: 32px; // Fixed height for consistency
+        line-height: 1.5; // Align text vertically
+        border-radius: 4px;
+  
+        &.ant-btn-primary {
+          background-color: #1890ff;
+          border-color: #1890ff;
+  
+          &:hover,
+          &:focus {
+            background-color: #40a9ff;
+            border-color: #40a9ff;
+          }
+        }
+  
+        &.ant-btn-default {
+          &:hover,
+          &:focus {
+            border-color: #d9d9d9;
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .date-picker-row {
+      flex-direction: column; // Stack vertically on smaller screens
+      gap: 8px;
+  
+      .ant-form-item {
+        margin-bottom: 16px; // Restore margin for stacked layout
+      }
+    }
+  
+    .button-row {
+      flex-direction: column; // Stack buttons on smaller screens
+      gap: 8px;
+  
+      .ant-btn {
+        width: 100%; // Full width on mobile
+      }
+    }
+  }

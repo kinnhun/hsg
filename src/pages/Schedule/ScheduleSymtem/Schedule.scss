@@ -1,0 +1,1178 @@
+.schedule-container {
+    width: 100%;
+    max-width: calc(100vw - 20rem);
+    position: relative;
+    margin-top: 50px;
+    border: 0.1rem solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0;
+    background-color: #fff;
+    overflow: hidden; /* Thay đổi từ overflow-x: auto thành hidden */
+}
+
+/* Bảng chính */
+.schedule-table {
+    width: 100%; /* Căn sát lề */
+    min-width: max-content; /* Tránh bị co nhỏ */
+    border-collapse: collapse;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+}
+
+/* Định dạng ô và viền */
+.schedule-table th,
+.schedule-table td {
+    border: 0.08rem solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+    white-space: nowrap; /* Tránh bị xuống dòng gây thừa khoảng trống */
+}
+
+/* Header bảng */
+.schedule-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+}
+
+/* Đảm bảo nền trắng cho tiêu đề */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: white !important;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-bottom: 0.08rem solid #ccc;
+}
+
+/* Cố định ba cột đầu tiên (Thứ, Buổi, Tiết) */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background-color: #fff !important;
+    text-align: center;
+    font-weight: bold;
+    border-right: 0.08rem solid #ccc;
+}
+
+
+
+
+/* Điều chỉnh khoảng cách khi cuộn */
+.col-1 { left: 0; min-width: 6.5rem; z-index: 6; }
+.col-2 { left: 6.5rem; min-width: 6rem; z-index: 5; }
+.col-3 { left: 12.5rem; min-width: 6rem; z-index: 4; }
+
+/* Xóa khoảng trắng thừa khi cuộn ngang */
+.schedule-table {
+    margin-right: -0.1rem; /* Loại bỏ khoảng trống thừa khi cuộn */
+}
+
+/* Hiệu ứng hover */
+.schedule-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Bo góc trên của header */
+.schedule-table thead th:first-child {
+    border-top-left-radius: 0.5rem;
+}
+
+.schedule-table thead th:last-child {
+    border-top-right-radius: 0.5rem;
+}
+/* Màu cho các thứ chẵn */
+.even-day {
+    background-color: #f0f8ff; /* Màu xanh nhạt */
+}
+
+/* Màu cho các thứ lẻ */
+.odd-day {
+    background-color: #fffaf0; /* Màu cam nhạt */
+}
+
+/* Hiệu ứng hover khi di chuột */
+.schedule-table tbody tr:hover {
+    background-color: #d0ebff !important;
+}
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-container select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.filter-container select:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #fff; /* Màu nền trắng */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng mềm mại */
+    position: relative;
+  
+    &::before {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #777;
+    }
+  }
+  
+  .filter-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .filter-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px;
+    gap: 4px; /* Khoảng cách giữa các dòng ngắn lại */
+    
+    label {
+      font-weight: 500;
+      font-size: 13px;
+      color: #333;
+    }
+    
+    select, input, button {
+      padding: 8px 14px; /* Thay đổi padding để input nhỏ hơn */
+      font-size: 13px; /* Kích thước font nhỏ hơn */
+      border-radius: 6px; /* Làm tròn góc mềm mại */
+      border: none; /* Loại bỏ đường viền cứng nhắc */
+      outline: none;
+      background-color: #fff; /* Nền trắng cho các input */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+      transition: box-shadow 0.3s ease;
+      
+      &:hover, &:focus {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Bóng đổ đậm hơn khi hover/focus */
+      }
+  
+      &:disabled {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+      }
+    }
+    
+    button {
+      padding: 8px 16px; /* Tăng padding cho nút, làm nút nhỏ hơn */
+      background-color: #0084D1;
+      color: white;
+      border: none;
+      border-radius: 6px; /* Làm tròn góc */
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: #0084D1;
+      }
+    }
+  }
+  
+  .search-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .filter-row {
+      flex-direction: column;
+    }
+  
+    .filter-column {
+      max-width: 100%;
+    }
+  }
+  
+
+
+  .filter-row-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-top: 50px;
+
+   // Style chung cho nút
+button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+      background: rgba(0, 0, 0, 0.1); // Màu nền khi hover chung
+  }
+}
+
+// Style riêng cho nút Lưu
+.btn-save {
+  background: #4CAF50; // Màu xanh
+  color: white;
+
+  &:hover {
+      background: #45a049; // Màu xanh đậm hơn khi hover
+  }
+}
+
+// Style riêng cho nút Xóa
+.btn-delete {
+  background: #f44336; // Màu đỏ
+  color: white;
+
+  &:hover {
+      background: #d32f2f; // Màu đỏ đậm hơn khi hover
+  }
+}
+
+    
+}
+
+.schedule-table td {
+    transition: background-color 0.2s;
+    
+    &[draggable="true"]:hover {
+        background-color: #f5f5f5;
+    }
+    
+    &.drag-over {
+        background-color: #e0e0e0;
+    }
+}
+
+.empty-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+.cell-select {
+    width: 100%;
+    padding: 2px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    
+    &:focus {
+        outline: none;
+        border-color: #4a90e2;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 400px;
+    
+    h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+}
+
+.modal-form {
+    .form-group {
+        margin-bottom: 15px;
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    }
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        
+        &:first-child {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        &:last-child {
+            background-color: #f44336;
+            color: white;
+        }
+    }
+}
+
+.empty-cell {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .add-schedule-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background-color: #e0e0e0;
+        color: #666;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        
+        &:hover {
+            background-color: #d0d0d0;
+        }
+    }
+}
+
+.floating-trash {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f44336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &.trash-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &.trash-active {
+        transform: scale(1.2);
+        background-color: #d32f2f;
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+        transform: scale(1.1);
+    }
+
+    &.trash-active svg {
+        animation: shake 0.5s ease-in-out infinite;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+.timetable-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+// .timetable-wrapper.top-scroll {
+//     height: 20px; // chỉ để hiển thị thanh cuộn
+//     margin-bottom: 8px;
+// }
+
+// .timetable-table.dummy-scroll {
+//     width: 1500px; // cùng chiều rộng với bảng thật bên dưới
+//     height: 1px; // để nội dung không hiển thị
+// }
+
+.schedule-container {
+    width: 100%;
+    max-width: calc(100vw - 20rem);
+    position: relative;
+    margin-top: 50px;
+    overflow: hidden; /* Changed from overflow-x: auto to hidden */
+}
+
+.sticky-filter {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Di chuyển cuộn ngang xuống container con */
+    padding: 0 16px;
+    margin-top: 16px;
+}
+
+.schedule-cell {
+    cursor: move;
+    user-select: none;
+    
+    &.dragging {
+        opacity: 0.5;
+    }
+}
+
+.drop-target {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #45a049;
+    }
+}
+
+.empty-cell {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .add-schedule-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background-color: #e0e0e0;
+        color: #666;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        
+        &:hover {
+            background-color: #d0d0d0;
+        }
+    }
+}
+
+.floating-trash {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f44336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &.trash-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &.trash-active {
+        transform: scale(1.2);
+        background-color: #d32f2f;
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+        transform: scale(1.1);
+    }
+
+    &.trash-active svg {
+        animation: shake 0.5s ease-in-out infinite;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+.timetable-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+// .timetable-wrapper.top-scroll {
+//     height: 20px; // chỉ để hiển thị thanh cuộn
+//     margin-bottom: 8px;
+// }
+
+// .timetable-table.dummy-scroll {
+//     width: 1500px; // cùng chiều rộng với bảng thật bên dưới
+//     height: 1px; // để nội dung không hiển thị
+// }
+
+.schedule-container {
+    width: 100%;
+    max-width: calc(100vw - 20rem);
+    position: relative;
+    margin-top: 50px;
+    overflow: hidden; /* Changed from overflow-x: auto to hidden */
+}
+
+.sticky-filter {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Di chuyển cuộn ngang xuống container con */
+    padding: 0 16px;
+    margin-top: 16px;
+}
+
+.schedule-cell {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.edit-schedule-dialog {
+    min-width: 400px;
+    
+    .schedule-info {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        
+        p {
+            margin: 5px 0;
+            color: #666;
+        }
+    }
+
+    .edit-schedule-form {
+        margin-top: 20px;
+        z-index: 9999999;
+
+
+        .form-group {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 500;
+                color: #333;
+            }
+
+            select {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                background-color: white;
+                
+                &:focus {
+                    border-color: #2196F3;
+                    outline: none;
+                }
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 24px;
+
+            button {
+                padding: 8px 16px;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+                font-weight: 500;
+                transition: all 0.2s;
+
+                &.save-btn {
+                    background-color: #2196F3;
+                    color: white;
+
+                    &:hover {
+                        background-color: #1976D2;
+                    }
+                }
+
+                &.delete-btn {
+                    background-color: #F44336;
+                    color: white;
+
+                    &:hover {
+                        background-color: #D32F2F;
+                    }
+                }
+
+                &.cancel-btn {
+                    background-color: #E0E0E0;
+                    color: #333;
+
+                    &:hover {
+                        background-color: #BDBDBD;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.drop-target {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #45a049;
+    }
+}
+
+.empty-cell {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .add-schedule-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background-color: #e0e0e0;
+        color: #666;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        
+        &:hover {
+            background-color: #d0d0d0;
+        }
+    }
+}
+
+.floating-trash {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f44336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &.trash-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &.trash-active {
+        transform: scale(1.2);
+        background-color: #d32f2f;
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+        transform: scale(1.1);
+    }
+
+    &.trash-active svg {
+        animation: shake 0.5s ease-in-out infinite;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+.timetable-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+// .timetable-wrapper.top-scroll {
+//     height: 20px; // chỉ để hiển thị thanh cuộn
+//     margin-bottom: 8px;
+// }
+
+// .timetable-table.dummy-scroll {
+//     width: 1500px; // cùng chiều rộng với bảng thật bên dưới
+//     height: 1px; // để nội dung không hiển thị
+// }
+
+.schedule-container {
+    width: 100%;
+    max-width: calc(100vw - 20rem);
+    position: relative;
+    margin-top: 50px;
+    overflow: hidden; /* Changed from overflow-x: auto to hidden */
+}
+
+.sticky-filter {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Di chuyển cuộn ngang xuống container con */
+    padding: 0 16px;
+    margin-top: 16px;
+}
+
+.schedule-cell {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.schedule-edit-dialog {
+  .schedule-edit-content {
+    max-width: 600px;
+    width: 90vw;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .schedule-edit-header {
+    .schedule-edit-title {
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: #2563eb;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .schedule-edit-info {
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .info-row {
+      transition: all 0.2s ease;
+      &:hover {
+        background-color: #f8fafc;
+        padding-left: 8px;
+      }
+    }
+  }
+
+  .schedule-edit-form {
+    .form-group {
+      label {
+        transition: color 0.2s ease;
+      }
+
+      .form-select {
+        transition: all 0.2s ease;
+        cursor: pointer;
+        
+        &:hover {
+          border-color: #2563eb;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        option {
+          padding: 8px;
+          &:hover {
+            background-color: #f3f4f6;
+          }
+        }
+      }
+    }
+
+    .schedule-edit-actions {
+      button {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        &:hover::before {
+          width: 300px;
+          height: 300px;
+        }
+
+        &.btn-save {
+          &:active {
+            transform: scale(0.98);
+          }
+        }
+
+        &.btn-delete {
+          &:active {
+            transform: scale(0.98);
+          }
+        }
+      }
+    }
+  }
+}
+
+.drop-target {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #45a049;
+    }
+}
+
+.empty-cell {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .add-schedule-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background-color: #e0e0e0;
+        color: #666;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        
+        &:hover {
+            background-color: #d0d0d0;
+        }
+    }
+}
+
+.floating-trash {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f44336;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &.trash-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &.trash-active {
+        transform: scale(1.2);
+        background-color: #d32f2f;
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+        transform: scale(1.1);
+    }
+
+    &.trash-active svg {
+        animation: shake 0.5s ease-in-out infinite;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+.timetable-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+// .timetable-wrapper.top-scroll {
+//     height: 20px; // chỉ để hiển thị thanh cuộn
+//     margin-bottom: 8px;
+// }
+
+// .timetable-table.dummy-scroll {
+//     width: 1500px; // cùng chiều rộng với bảng thật bên dưới
+//     height: 1px; // để nội dung không hiển thị
+// }
+.schedule-container {
+    // Giữ nguyên các style hiện có
+    // (Tôi giả định file Schedule.scss đã có các style cho các thành phần khác như sticky-filter, filter-container, schedule-table, v.v.)
+  }
+  
+  .schedule-toast-container {
+    .Toastify__toast {
+      z-index: 9999; // Đảm bảo toast nổi lên trên các thành phần khác
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Thêm shadow để nổi bật
+      border-radius: 8px; // Bo góc nhẹ
+      font-size: 16px; // Kích thước chữ
+      font-weight: 500; // Độ đậm chữ
+      padding: 12px 16px; // Padding bên trong
+      min-height: 60px; // Chiều cao tối thiểu
+    }
+  
+    .Toastify__toast--success {
+      background-color: #28a745; // Màu xanh cho thông báo thành công
+      color: #ffffff;
+    }
+  
+    .Toastify__toast--error {
+      background-color: #dc3545; // Màu đỏ cho thông báo lỗi
+      color: #ffffff;
+    }
+  
+    .Toastify__close-button {
+      color: #ffffff; // Màu nút đóng
+      opacity: 0.8;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  
+    .Toastify__progress-bar {
+      background-color: rgba(255, 255, 255, 0.7); // Thanh tiến trình màu trắng mờ
+    }
+  }
+
+
+  .btn-schedule {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background-color: #727cf5; // màu chính bạn hay dùng
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    svg {
+      stroke: #fff;
+    }
+  
+    &:hover {
+      background-color: darken(#0084D1, 10%);
+    }
+  
+    &:active {
+      transform: scale(0.98);
+    }
+  
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+  
